@@ -1,0 +1,3 @@
+[submodule "AttestDefi/lib/forge-std"]
+	path = AttestDefi/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
