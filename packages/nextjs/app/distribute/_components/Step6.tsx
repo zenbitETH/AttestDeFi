@@ -1,6 +1,6 @@
 "use client";
 
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import Next from "./Next";
 import { Title } from "./Title";
 import { gql, useQuery } from "@apollo/client";
@@ -42,6 +42,8 @@ const pageVariant: Variants = {
 export default function Step6({ handleNext, handleBack }: { handleNext: any; handleBack: any }) {
   const [goback, setGoBack] = useState<boolean>(false);
   const { disperseFormData } = useGlobalState();
+  const [sum, setSum] = useState(0);
+  const [inputs, setInputs] = useState<any>({});
 
   const GET_ATTESTERS = gql`
     query Attestations($schemaID: String!, $attesterAddress: String!) {
@@ -60,6 +62,19 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
       attesterAddress: disperseFormData.attesterAddress, // 0xe2A45CA9Ec5780FC389FBD8991980397b8B470AF
     },
   });
+
+  function getSum() {
+    const values: any = Object.values(inputs);
+    const sum = values.reduce((acc: number, c: number) => acc + c, 0);
+    setSum(sum);
+  }
+
+  function handleInput(e: any) {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: +value });
+  }
+
+  useEffect(() => getSum(), [inputs]);
 
   const catchSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -112,7 +127,10 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
                   <td>{attestation.recipient}</td>
                   <td>
                     <input
-                      type="text"
+                      type="number"
+                      name={`ammount-${idx + 1}`}
+                      value={inputs[idx + 1]}
+                      onChange={handleInput}
                       className="mt-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                     />
                   </td>
@@ -120,6 +138,7 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
               ))}
             </tbody>
           </table>
+          <div className="sum">Total tokens: {sum}</div>
         </div>
       </motion.section>
       <Next goBack={true} next={false} />
