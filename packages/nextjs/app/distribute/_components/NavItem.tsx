@@ -21,10 +21,7 @@ export const NavItem = ({ step, type, on }: NavItemType) => {
   return (
     <motion.div variants={navItemVariant} className="flex md:p-10 md:items-center md:py-0 md:space-x-5">
       <div
-        className={
-          "h-11 w-11 border font-bold border-white grid place-items-center rounded-full transition duration-500 ease-in-out " +
-          (on && "bg-Light-blue border-Light-blue text-Marine-blue")
-        }
+        className={`h-8 w-8 border font-bold border-white grid place-items-center rounded-full transition duration-500 ease-in-out ${on ? "bg-green-300 border-green-400 text-blue-700" : ""}`}
       >
         {step}
       </div>

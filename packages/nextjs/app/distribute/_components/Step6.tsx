@@ -1,6 +1,9 @@
+"use client";
+
 import React, { SyntheticEvent, useState } from "react";
 import Next from "./Next";
 import { Title } from "./Title";
+import { gql, useQuery } from "@apollo/client";
 import { Variants, motion } from "framer-motion";
 import { useGlobalState } from "~~/services/store/store";
 
@@ -36,10 +39,27 @@ const pageVariant: Variants = {
   },
 };
 
-export default function Step5({ handleNext, handleBack }: { handleNext: any; handleBack: any }) {
+export default function Step6({ handleNext, handleBack }: { handleNext: any; handleBack: any }) {
   const [goback, setGoBack] = useState<boolean>(false);
+  const { disperseFormData } = useGlobalState();
 
-  const { disperseFormData, setDisperseFormData } = useGlobalState();
+  const GET_ATTESTERS = gql`
+    query Attestations($schemaID: String!, $attesterAddress: String!) {
+      attestations(where: { schemaId: { equals: $schemaID }, attester: { equals: $attesterAddress } }) {
+        id
+        attester
+        recipient
+        schemaId
+      }
+    }
+  `;
+
+  const { data } = useQuery(GET_ATTESTERS, {
+    variables: {
+      schemaID: disperseFormData.schemaID, // 0xddc12d29e4863e857d1b6429f2afd4bf3d687110bbb425e730b87d5f1efcda5a
+      attesterAddress: disperseFormData.attesterAddress, // 0xe2A45CA9Ec5780FC389FBD8991980397b8B470AF
+    },
+  });
 
   const catchSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -75,30 +95,31 @@ export default function Step5({ handleNext, handleBack }: { handleNext: any; han
         exit={goback ? "exit2" : "exit"}
         className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
-        <Title title="Type of rewards">
-          Select the type of rewards you want to disperse, it can be any ERC20 token.
-        </Title>
-        <div className="w-full flex flex-col space-y-4 md:space-y-5 bg-Alabaster p-6 rounded-xl md:p-8">
-          <select
-            name="typeOfReward"
-            value={disperseFormData.typeOfReward}
-            onChange={event => setDisperseFormData("typeOfReward", event.target.value)}
-            className="mt-4 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          >
-            <option value="">Select type of reward</option>
-            <option value="ETH">ETH</option>
-            <option value="custom">Custom ERC20 token</option>
-          </select>
-          {disperseFormData.typeOfReward === "custom" ? (
-            <input
-              type="text"
-              name="erc20address"
-              placeholder="Enter ERC20 contract address. 0x...."
-              value={disperseFormData.erc20address}
-              onChange={event => setDisperseFormData("erc20address", event.target.value)}
-              className="mt-4 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          ) : null}
+        <Title title="Configure transfer">Transfer funds to multiple receivers.</Title>
+        <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster p-6 rounded-xl md:p-8 overflow-y-auto">
+          <table className="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Recipient Address</th>
+                <th>Reward ammount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.attestations?.map((attestation: any, idx: number) => (
+                <tr key={idx}>
+                  <th>{idx + 1}</th>
+                  <td>{attestation.recipient}</td>
+                  <td>
+                    <input
+                      type="text"
+                      className="mt-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </motion.section>
       <Next goBack={true} next={false} />

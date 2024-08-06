@@ -38,8 +38,8 @@ export const useGlobalState = create<GlobalState>(set => ({
   },
   disperseFormData: {
     baseNetwork: "",
-    schemaID: "",
-    attesterAddress: "",
+    schemaID: "0xddc12d29e4863e857d1b6429f2afd4bf3d687110bbb425e730b87d5f1efcda5a",
+    attesterAddress: "0xe2A45CA9Ec5780FC389FBD8991980397b8B470AF",
     destinationNetwork: "",
     typeOfReward: "",
     erc20address: "",
