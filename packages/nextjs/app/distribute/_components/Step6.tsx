@@ -64,12 +64,10 @@ export default function Step6() {
     },
   });
 
-
   useEffect(() => {
     if (data?.attestations) {
-      setAttestations(data.attestations); //guarda el valor 
+      setAttestations(data.attestations); //guarda el valor
 
-      
       const initialInputs = data.attestations.reduce((acc: any, attestation: any, idx: number) => {
         acc[idx] = 0; //asignacion
         return acc;
@@ -78,10 +76,7 @@ export default function Step6() {
     }
   }, [data]);
 
-  
-
   const { writeContractAsync } = useScaffoldWriteContract("Disperse");
-
 
   function getSum() {
     const values: any = Object.values(inputs); // obtiene el valor del array
@@ -114,10 +109,6 @@ export default function Step6() {
   const catchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-
-    const typebtn = ((e.nativeEvent as SubmitEvent).submitter as HTMLInputElement).name;
-
-
     if (disperseFormData.typeOfReward !== "") {
       if (disperseFormData.typeOfReward === "custom" && disperseFormData.erc20address !== "") {
       } else if (disperseFormData.typeOfReward === "ETH") {
@@ -148,13 +139,8 @@ export default function Step6() {
         variants={pageVariant}
         initial="initial"
         animate="animate"
-
-        exit={goback ? "exit2" : "exit"}
-        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
-
         exit={"exit"}
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
-
+        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
         <Title title="Configure transfer">Transfer funds to multiple receivers.</Title>
         <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster p-6 rounded-xl md:p-8 overflow-y-auto">
