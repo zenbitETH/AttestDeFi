@@ -1,10 +1,11 @@
 "use client";
 
 import React, { SyntheticEvent, useEffect, useState } from "react";
-import Next from "./Next";
 import { Title } from "./Title";
 import { gql, useQuery } from "@apollo/client";
 import { Variants, motion } from "framer-motion";
+import { parseEther } from "viem";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useGlobalState } from "~~/services/store/store";
 
 const pageVariant: Variants = {
@@ -39,8 +40,7 @@ const pageVariant: Variants = {
   },
 };
 
-export default function Step6({ handleNext, handleBack }: { handleNext: any; handleBack: any }) {
-  const [goback, setGoBack] = useState<boolean>(false);
+export default function Step6() {
   const { disperseFormData } = useGlobalState();
   const [sum, setSum] = useState(0); //suma total
   const [inputs, setInputs] = useState<any>({}); //  valores de los inputs
@@ -64,11 +64,12 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
     },
   });
 
+
   useEffect(() => {
     if (data?.attestations) {
-      setAttestations(data.attestations); //guarda el valor atestaciones
+      setAttestations(data.attestations); //guarda el valor 
 
-      //valor inicia en 0
+      
       const initialInputs = data.attestations.reduce((acc: any, attestation: any, idx: number) => {
         acc[idx] = 0; //asignacion
         return acc;
@@ -77,7 +78,11 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
     }
   }, [data]);
 
-  // suma imput
+  
+
+  const { writeContractAsync } = useScaffoldWriteContract("Disperse");
+
+
   function getSum() {
     const values: any = Object.values(inputs); // obtiene el valor del array
     const sum = values.reduce((acc: number, c: number) => acc + c, 0); // suma el valor
@@ -106,28 +111,33 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
 
   useEffect(() => getSum(), [inputs]);
 
-  const catchSubmit = (e: SyntheticEvent) => {
+  const catchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+
 
     const typebtn = ((e.nativeEvent as SubmitEvent).submitter as HTMLInputElement).name;
 
+
     if (disperseFormData.typeOfReward !== "") {
       if (disperseFormData.typeOfReward === "custom" && disperseFormData.erc20address !== "") {
-        if (typebtn === "back") {
-          setGoBack(true);
-          handleBack();
-        } else if (typebtn === "next") {
-          setGoBack(false);
-          handleNext();
-        }
       } else if (disperseFormData.typeOfReward === "ETH") {
-        if (typebtn === "back") {
-          setGoBack(true);
-          handleBack();
-        } else if (typebtn === "next") {
-          setGoBack(false);
-          handleNext();
-        }
+        const recipientsAddresses = data.attestations.map((att: any) => att.recipient);
+        let valuesToDisperse: any = Object.values(inputs); //.map((val: string) => parseEther(val));
+        valuesToDisperse = valuesToDisperse.map((value: any) => parseEther(value.toString(), "gwei"));
+        console.log({ recipientsAddresses, valuesToDisperse });
+
+        await writeContractAsync(
+          {
+            functionName: "disperseEther",
+            args: [recipientsAddresses, valuesToDisperse],
+          },
+          {
+            onSuccess: (data, variables, context) => {
+              console.log({ data, variables, context });
+              alert("success");
+            },
+          },
+        );
       }
     }
   };
@@ -138,8 +148,13 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
         variants={pageVariant}
         initial="initial"
         animate="animate"
+
         exit={goback ? "exit2" : "exit"}
         className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+
+        exit={"exit"}
+        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+
       >
         <Title title="Configure transfer">Transfer funds to multiple receivers.</Title>
         <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster p-6 rounded-xl md:p-8 overflow-y-auto">
@@ -182,9 +197,11 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
             </tbody>
           </table>
           <div className="sum">Total tokens: {sum}</div>
+          <button type="submit" className="btn">
+            Disperse
+          </button>
         </div>
       </motion.section>
-      <Next goBack={true} next={false} />
     </form>
   );
 }
