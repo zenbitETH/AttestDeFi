@@ -64,7 +64,7 @@ const Distribute: NextPage = () => {
 
                   {step.index === 5 && <Step5 handleNext={handleNext} handleBack={handleBack} />}
 
-                  {step.index === 6 && <Step6 handleNext={handleNext} handleBack={handleBack} />}
+                  {step.index === 6 && <Step6 />}
                 </div>
               </div>
             ))}

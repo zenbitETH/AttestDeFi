@@ -1,10 +1,11 @@
 "use client";
 
 import React, { SyntheticEvent, useEffect, useState } from "react";
-import Next from "./Next";
 import { Title } from "./Title";
 import { gql, useQuery } from "@apollo/client";
 import { Variants, motion } from "framer-motion";
+import { parseEther } from "viem";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useGlobalState } from "~~/services/store/store";
 
 const pageVariant: Variants = {
@@ -39,8 +40,7 @@ const pageVariant: Variants = {
   },
 };
 
-export default function Step6({ handleNext, handleBack }: { handleNext: any; handleBack: any }) {
-  const [goback, setGoBack] = useState<boolean>(false);
+export default function Step6() {
   const { disperseFormData } = useGlobalState();
   const [sum, setSum] = useState(0);
   const [inputs, setInputs] = useState<any>({});
@@ -63,6 +63,8 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
     },
   });
 
+  const { writeContractAsync } = useScaffoldWriteContract("Disperse");
+
   function getSum() {
     const values: any = Object.values(inputs);
     const sum = values.reduce((acc: number, c: number) => acc + c, 0);
@@ -76,29 +78,35 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
 
   useEffect(() => getSum(), [inputs]);
 
-  const catchSubmit = (e: SyntheticEvent) => {
+  const catchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    const typebtn = ((e.nativeEvent as SubmitEvent).submitter as HTMLInputElement).name;
     if (disperseFormData.typeOfReward !== "") {
       if (disperseFormData.typeOfReward === "custom" && disperseFormData.erc20address !== "") {
-        if (typebtn === "back") {
-          setGoBack(true);
-          handleBack();
-        } else if (typebtn === "next") {
-          setGoBack(false);
-          handleNext();
-        }
       } else if (disperseFormData.typeOfReward === "ETH") {
-        if (typebtn === "back") {
-          setGoBack(true);
-          handleBack();
-        } else if (typebtn === "next") {
-          setGoBack(false);
-          handleNext();
-        }
+        const recipientsAddresses = data.attestations.map((att: any) => att.recipient);
+        let valuesToDisperse: any = Object.values(inputs); //.map((val: string) => parseEther(val));
+        valuesToDisperse = valuesToDisperse.map((value: any) => parseEther(value.toString(), "gwei"));
+        console.log({ recipientsAddresses, valuesToDisperse });
+
+        await writeContractAsync(
+          {
+            functionName: "disperseEther",
+            args: [recipientsAddresses, valuesToDisperse],
+          },
+          {
+            onSuccess: (data, variables, context) => {
+              console.log({ data, variables, context });
+              alert("success");
+            },
+          },
+        );
       }
     }
+  };
+
+  const handleDisperseRewards = () => {
+    console.log("disperse rewards");
   };
 
   return (
@@ -107,7 +115,7 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
         variants={pageVariant}
         initial="initial"
         animate="animate"
-        exit={goback ? "exit2" : "exit"}
+        exit={"exit"}
         className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
         <Title title="Configure transfer">Transfer funds to multiple receivers.</Title>
@@ -139,9 +147,11 @@ export default function Step6({ handleNext, handleBack }: { handleNext: any; han
             </tbody>
           </table>
           <div className="sum">Total tokens: {sum}</div>
+          <button type="submit" className="btn" onClick={handleDisperseRewards}>
+            Disperse
+          </button>
         </div>
       </motion.section>
-      <Next goBack={true} next={false} />
     </form>
   );
 }

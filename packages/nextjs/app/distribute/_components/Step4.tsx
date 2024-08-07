@@ -80,6 +80,7 @@ export default function Step4({ handleNext, handleBack }: { handleNext: any; han
             <option value="Base">Base</option>
             <option value="Celo">Celo</option>
             <option value="Mode">Mode</option>
+            <option value="Hardhat">Hardhat</option>
           </select>
         </div>
       </motion.section>
