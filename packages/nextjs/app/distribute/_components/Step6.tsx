@@ -105,10 +105,6 @@ export default function Step6() {
     }
   };
 
-  const handleDisperseRewards = () => {
-    console.log("disperse rewards");
-  };
-
   return (
     <form onSubmit={catchSubmit} className=" w-full flex flex-col  items-center md:h-[580px] md:justify-between">
       <motion.section
@@ -147,7 +143,7 @@ export default function Step6() {
             </tbody>
           </table>
           <div className="sum">Total tokens: {sum}</div>
-          <button type="submit" className="btn" onClick={handleDisperseRewards}>
+          <button type="submit" className="btn">
             Disperse
           </button>
         </div>
