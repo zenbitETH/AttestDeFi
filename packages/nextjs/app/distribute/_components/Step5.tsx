@@ -36,7 +36,7 @@ const pageVariant: Variants = {
   },
 };
 
-export default function Step4({ handleNext, handleBack }: { handleNext: any; handleBack: any }) {
+export default function Step5({ handleNext, handleBack }: { handleNext: any; handleBack: any }) {
   const [goback, setGoBack] = useState<boolean>(false);
 
   const { disperseFormData, setDisperseFormData } = useGlobalState();
