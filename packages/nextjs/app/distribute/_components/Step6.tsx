@@ -4,7 +4,7 @@ import React, { SyntheticEvent, useEffect, useState } from "react";
 import { Title } from "./Title";
 import { gql, useQuery } from "@apollo/client";
 import { Variants, motion } from "framer-motion";
-import { parseEther } from "viem";
+import { formatUnits, parseEther } from "viem";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useGlobalState } from "~~/services/store/store";
 
@@ -68,10 +68,10 @@ export default function Step6() {
     if (data?.attestations) {
       setAttestations(data.attestations); //guarda el valor
 
-      const initialInputs = data.attestations.reduce((acc: any, attestation: any, idx: number) => {
-        acc[idx] = 0; //asignacion
+      const initialInputs = data.attestations.reduce((acc: any) => {
         return acc;
       }, {});
+
       setInputs(initialInputs); // estado inicial
     }
   }, [data]);
@@ -113,19 +113,27 @@ export default function Step6() {
       if (disperseFormData.typeOfReward === "custom" && disperseFormData.erc20address !== "") {
       } else if (disperseFormData.typeOfReward === "ETH") {
         const recipientsAddresses = data.attestations.map((att: any) => att.recipient);
+
         let valuesToDisperse: any = Object.values(inputs); //.map((val: string) => parseEther(val));
-        valuesToDisperse = valuesToDisperse.map((value: any) => parseEther(value.toString(), "gwei"));
-        console.log({ recipientsAddresses, valuesToDisperse });
+        valuesToDisperse = valuesToDisperse.map((value: any) => parseEther(value.toString(), "gwei")); // all the token rewards ammounts in bigint[]
+        const totalTokensToDisperse = valuesToDisperse.map((value: any) => value); // all the token rewards ammounts in number[]
+
+        let total = 0;
+        for (let i = 0; totalTokensToDisperse.length > i; i++) {
+          total = total + Number(formatUnits(totalTokensToDisperse[i], 9));
+        }
+        const totalBigInt = parseEther(total.toString(), "wei");
 
         await writeContractAsync(
           {
             functionName: "disperseEther",
             args: [recipientsAddresses, valuesToDisperse],
+            value: totalBigInt,
           },
           {
             onSuccess: (data, variables, context) => {
-              console.log({ data, variables, context });
-              alert("success");
+              console.log("Diserse onSuccess ", { data, variables, context });
+              alert("Diserse success");
             },
           },
         );
@@ -160,7 +168,8 @@ export default function Step6() {
                   <td>{attestation.recipient}</td>
                   <td>
                     <input
-                      type="number"
+                      defaultValue={10}
+                      type="text"
                       name={`ammount-${idx + 1}`} // id input
                       value={inputs[`ammount-${idx + 1}`] || ""} // valor del input
                       onChange={handleInput} // función de cambio
