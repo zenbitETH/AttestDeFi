@@ -24,6 +24,7 @@ type GlobalState = {
     baseNetwork: string;
     schemaID: string;
     attesterAddress: string;
+    attesterENS: string;
     destinationNetwork: string;
     typeOfReward: string;
     erc20address: string;
@@ -40,6 +41,7 @@ export const useGlobalState = create<GlobalState>(set => ({
     baseNetwork: "",
     schemaID: "0xddc12d29e4863e857d1b6429f2afd4bf3d687110bbb425e730b87d5f1efcda5a",
     attesterAddress: "0xe2A45CA9Ec5780FC389FBD8991980397b8B470AF",
+    attesterENS: "",
     destinationNetwork: "",
     typeOfReward: "",
     erc20address: "",

@@ -2,6 +2,7 @@
 
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { Title } from "./Title";
+import { Address } from "./scaffold-eth";
 import { gql, useQuery } from "@apollo/client";
 import { Variants, motion } from "framer-motion";
 import { formatUnits, parseEther } from "viem";
@@ -165,7 +166,9 @@ export default function Step6() {
               {attestations.map((attestation: any, idx: number) => (
                 <tr key={idx}>
                   <th>{idx + 1}</th>
-                  <td>{attestation.recipient}</td>
+                  <td>
+                    <Address address={attestation.recipient} />
+                  </td>
                   <td>
                     <input
                       defaultValue={10}

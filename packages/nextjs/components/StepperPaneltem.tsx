@@ -17,7 +17,7 @@ const navItemVariant: Variants = {
   },
 };
 
-export const NavItem = ({ step, type, on }: NavItemType) => {
+export const StepperPaneltem = ({ step, type, on }: NavItemType) => {
   return (
     <motion.div variants={navItemVariant} className="flex md:p-10 md:items-center md:py-0 md:space-x-5">
       <div

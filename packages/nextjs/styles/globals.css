@@ -32,7 +32,7 @@ p {
 }
 
 nav {
-  background-image: url(/bg-sidebar-mobile.svg);
+  background-image: url(/zenbaner-mobile.png);
 
   background-size: cover;
   background-repeat: no-repeat;
@@ -40,9 +40,8 @@ nav {
 
 @media (min-width: 768px) {
   nav {
-    background-image: url(/bg-sidebar-desktop.svg);
-
-    background-size: cover;
+    background-image: url(/zenbaner-vertical.png);
+    background-size: contain;
     background-repeat: no-repeat;
   }
 }
