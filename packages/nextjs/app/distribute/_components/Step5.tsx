@@ -73,7 +73,7 @@ export default function Step5({ handleNext, handleBack }: { handleNext: any; han
         initial="initial"
         animate="animate"
         exit={goback ? "exit2" : "exit"}
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
         <Title title="Type of rewards">
           Select the type of rewards you want to disperse, it can be any ERC20 token.
