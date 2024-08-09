@@ -1,70 +1,77 @@
 "use client";
 
-import Link from "next/link";
+import React, { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import type { NextPage } from "next";
-import { useAccount } from "wagmi";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Address } from "~~/components/scaffold-eth";
+import Step1 from "~~/components/Step1";
+import Step2 from "~~/components/Step2";
+import Step3 from "~~/components/Step3";
+import Step4 from "~~/components/Step4";
+import Step5 from "~~/components/Step5";
+import Step6 from "~~/components/Step6";
+import Navbar from "~~/components/StepperPanel";
 
 const Home: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const steps = [
+    { index: 1, label: "Step 1", content: "Select a network" },
+    { index: 2, label: "Step 2", content: "Enter the schema ID" },
+    { index: 3, label: "Step 3", content: "Enter the attester address" },
+    { index: 4, label: "Step 4", content: "Select a destination network" },
+    { index: 5, label: "Step 5", content: "Type of rewards" },
+    { index: 6, label: "Step 6", content: "Configure transfer" },
+  ];
+  const isLastStep = currentStep === steps.length;
+  const isFirstStep = currentStep === 1;
+
+  const handleNext = () => {
+    if (!isLastStep) {
+      setCurrentStep(prevStep => prevStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (!isFirstStep) {
+      setCurrentStep(prevStep => prevStep - 1);
+    }
+  };
 
   return (
-    <>
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row">
-            <p className="my-2 font-medium">Connected Address:</p>
-            <Address address={connectedAddress} />
-          </div>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
-        </div>
+    <main
+      className="bg-Light-gray grid place-items-center w-screen md:min-h-full box-border overflow-x-hidden"
+      style={{ fontFamily: "Ubuntu" }}
+    >
+      <main className=" flex flex-col items-center min-h-full md:min-h-full w-screen md:max-w-[1280px] md:flex-row md:bg-white md:rounded-xl md:p-5 relative md:h-fit md:overflow-x-hidden md:overflow-hidden">
+        <Navbar step={currentStep} />
+        <section className="w-full flex flex-1 gap-4 flex-col items-center md:h-full md:justify-between md:mb-0">
+          <AnimatePresence mode="wait">
+            {steps.map(step => (
+              <div
+                key={step.index}
+                data-hs-stepper-content-item={`{ "index": ${step.index} }`}
+                className={`${currentStep === step.index ? "active w-full p-4" : ""}`}
+                style={{ display: currentStep === step.index ? "block" : "none" }}
+              >
+                <div className="w-full p-4 bg-gray-50 flex justify-center items-center border border-dashed text-gray-500 dark:text-neutral-500 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                  {step.index === 1 && <Step1 handleNext={handleNext} />}
 
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contracts
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+                  {step.index === 2 && <Step2 handleNext={handleNext} handleBack={handleBack} />}
+
+                  {step.index === 3 && <Step3 handleNext={handleNext} handleBack={handleBack} />}
+
+                  {step.index === 4 && <Step4 handleNext={handleNext} handleBack={handleBack} />}
+
+                  {step.index === 5 && <Step5 handleNext={handleNext} handleBack={handleBack} />}
+
+                  {step.index === 6 && <Step6 />}
+                </div>
+              </div>
+            ))}
+          </AnimatePresence>
+        </section>
+      </main>
+    </main>
   );
 };
 
