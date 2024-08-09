@@ -2,6 +2,7 @@
 
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { Title } from "./Title";
+import { Address } from "./scaffold-eth";
 import { gql, useQuery } from "@apollo/client";
 import { Variants, motion } from "framer-motion";
 import { formatUnits, parseEther } from "viem";
@@ -69,8 +70,7 @@ export default function Step6() {
     if (data?.attestations) {
       setAttestations(data.attestations); //guarda el valor
 
-      const initialInputs = data.attestations.reduce((acc: any, attestation: any, idx: number) => {
-        acc[`ammount-${idx + 1}`] = 0;
+      const initialInputs = data.attestations.reduce((acc: any) => {
         return acc;
       }, {});
 
@@ -200,11 +200,13 @@ export default function Step6() {
               {attestations.map((attestation: any, idx: number) => (
                 <tr key={idx}>
                   <th>{idx + 1}</th>
-                  <td>{attestation.recipient}</td>
+                  <td>
+                    <Address address={attestation.recipient} />
+                  </td>
                   <td>
                     <input
-                      //defaultValue={10}
-                      type="number" //text
+                      defaultValue={10}
+                      type="text"
                       name={`ammount-${idx + 1}`} // id input
                       value={inputs[`ammount-${idx + 1}`] || ""} // valor del input
                       onChange={handleInput} // función de cambio
