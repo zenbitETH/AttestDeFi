@@ -45,14 +45,14 @@ function Step1({ handleNext }: { handleNext: any }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full flex flex-col flex-1 md:min-h-fit items-center md:h-[580px] md:justify-between"
+      className="w-screen flex flex-col h-full flex-1 md:min-h-fit items-center md:h-[580px] md:justify-between border-4 border-Strawberry-red"
     >
       <motion.section
         variants={pageVariant}
         // initial={location.hasOwnProperty("state.name") ? "initial" : "initial2"}
         animate="animate"
         exit="exit"
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%]"
+        className="flex flex-col  mb-8 md:mb-0 bg-white w-screen rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%]"
       >
         <Title title="Select attest network">
           Please, select the network you want to validate the attestations from.

@@ -10,7 +10,7 @@ export default function Next({ goBack, next }: backType) {
         <button
           type="submit"
           name="back"
-          className="text-[16px] text-Cool-gray transform duration-300 hover:text-Marine-blue font-[500]"
+          className="text-[16px] text-Purplish-blue transform duration-300 hover:text-Marine-blue font-[500]"
         >
           Go Back
         </button>
@@ -20,7 +20,7 @@ export default function Next({ goBack, next }: backType) {
         <button
           type="submit"
           name="next"
-          className="bg-Marine-blue hover:brightness-150 transform ease-in-out duration-300 font-[500] text-[16px] rounded-lg text-black py-3 px-4 md:py-4 md:px-8"
+          className="bg-Marine-blue text-Light-blue hover:brightness-150 transform ease-in-out duration-300 font-[500] text-[16px] rounded-lg text-black py-3 px-4 md:py-4 md:px-8"
         >
           Next Step
         </button>

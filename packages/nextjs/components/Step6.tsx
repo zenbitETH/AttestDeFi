@@ -88,7 +88,7 @@ export default function Step6() {
   //  cambio del imput
   function handleInput(e: any) {
     const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: +value });
+    setInputs({ ...inputs, [name]: value });
   }
 
   // elimina fila
@@ -143,16 +143,16 @@ export default function Step6() {
   };
 
   return (
-    <form onSubmit={catchSubmit} className="w-full flex flex-col items-center md:h-[580px] md:justify-between">
+    <form onSubmit={catchSubmit} className="w-screen flex flex-col items-center md:h-[580px] md:justify-between">
       <motion.section
         variants={pageVariant}
         initial="initial"
         animate="animate"
         exit={"exit"}
-        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col mb-8 md:mb-0 bg-white w-full rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
         <Title title="Configure transfer">Transfer funds to multiple receivers.</Title>
-        <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster p-6 rounded-xl md:p-8 overflow-y-auto">
+        <div className="w-screen flex flex-col space-y-4 md:space-y-3 bg-Alabaster p-6 rounded-xl md:p-8 overflow-y-auto">
           <table className="table">
             <thead>
               <tr>
