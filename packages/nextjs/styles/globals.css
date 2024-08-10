@@ -10,7 +10,16 @@
 }
 
 input, select {
-  @apply font-rob text-lg placeholder:italic px-6 py-3 text-black w-full border-zen mx-auto rounded-md bg-white;
+  @apply font-oxy text-lg placeholder:italic px-6 py-3 w-full border-zen mx-auto rounded-md bg-bit/80 text-white;
+}
+
+Title {
+  @apply font-oxy
+}
+
+button {
+  @apply
+  border-bit border text-black hover:text-white hover:bg-bit px-6 py-1 rounded-md font-ral xl:text-lg 
 }
 
 body {
@@ -37,17 +46,4 @@ p {
   @apply shadow-none;
 }
 
-nav {
-  background-image: url(/zenbaner-mobile.png);
 
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 768px) {
-  nav {
-    background-image: url(/zenbaner-vertical.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-}

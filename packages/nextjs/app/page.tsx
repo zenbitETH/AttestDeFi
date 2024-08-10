@@ -39,20 +39,20 @@ const Home: NextPage = () => {
 
   return (
     <main
-      className="grid place-items-center w-screen md:min-h-full box-border overflow-x-hidden"
+      className="grid place-items-center md:min-h-full box-border overflow-x-hidden "
       style={{ fontFamily: "Ubuntu" }}
     >
-      <main className=" flex flex-col items-center min-h-full md:min-h-full w-screen md:max-w-[1280px] md:flex-row md:rounded-xl md:p-5 relative md:h-fit md:overflow-x-hidden md:overflow-hidden">
-        <Navbar step={currentStep} />
+      <Navbar step={currentStep} />
+      <main className=" absolute top-1/2 -translate-y-1/2 flex flex-col w-5/12 items-center h-full md:min-h-full md:flex-row md:rounded-xl  md:h-fit md:overflow-x-hidden md:overflow-hidden">
         <AnimatePresence mode="wait">
           {steps.map(step => (
             <div
               key={step.index}
               data-hs-stepper-content-item={`{ "index": ${step.index} }`}
-              className={`${currentStep === step.index ? "active w-full " : ""}`}
+              className={`${currentStep === step.index ? "active h-full w-full " : ""}`}
               style={{ display: currentStep === step.index ? "block" : "none" }}
             >
-              <div className="w-full p-4  flex justify-center items-center text-gray-500 dark:text-neutral-500 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+              <div className=" flex justify-center items-center text-gray-600 dark:text-neutral-600 rounded-md dark:bg-neutral-800 dark:border-neutral-700">
                 {step.index === 1 && <Step1 handleNext={handleNext} />}
 
                 {step.index === 2 && <Step2 handleNext={handleNext} handleBack={handleBack} />}

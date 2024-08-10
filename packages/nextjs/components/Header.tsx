@@ -59,7 +59,7 @@ export const HeaderMenuLinks = () => {
  */
 export const Header = () => {
   return (
-    <div className="sticky lg:static top-0 navbar bg-none min-h-0 flex-shrink-0 justify-between z-20 px-0 sm:px-2">
+    <div className="fixed top-0 navbar bg-none min-h-0 flex-shrink-0 justify-between z-20 px-0 sm:px-2">
       <div className="navbar-start w-auto lg:w-1/2">
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex relative h-20 w-80">
