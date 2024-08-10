@@ -79,7 +79,7 @@ function Step2({ handleNext, handleBack }: { handleNext: any; handleBack: any })
             value={disperseFormData.schemaID}
             onChange={event => setDisperseFormData("schemaID", event.target.value)}
             placeholder="Enter schema ID"
-            className="bg-zen/50 text-gray-600 text-base"
+            className="bg-zen/50 text-gray-600 dark:text-white text-base"
           />
         </div>
       </motion.section>

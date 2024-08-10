@@ -59,7 +59,7 @@ function Step1({ handleNext }: { handleNext: any }) {
           name="baseNetwork"
           value={disperseFormData.baseNetwork}
           onChange={event => setDisperseFormData("baseNetwork", event.target.value)}
-          className="mb-3 bg-zen/50 text-gray-600"
+          className="mb-3 bg-zen/50 text-gray-600 dark:text-white"
         >
           <option value="">Select a network</option>
           <option value="Ethereum">⬜ Ethereum</option>

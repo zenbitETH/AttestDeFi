@@ -167,7 +167,7 @@ export default function Step6() {
         <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster rounded-xl overflow-y-auto">
           <table className="table">
             <thead>
-              <tr className="font-ral">
+              <tr className="font-ral dark:text-white">
                 <th></th>
                 <th>Recipient Address</th>
                 <th>Reward Amount</th>
@@ -176,7 +176,7 @@ export default function Step6() {
             </thead>
             <tbody>
               {attestations.map((attestation: any, idx: number) => (
-                <tr className="font-oxy" key={idx}>
+                <tr className="font-oxy dark:text-white" key={idx}>
                   <th>{idx + 1}</th>
                   <td>
                     <Address address={attestation.recipient} />
@@ -195,7 +195,7 @@ export default function Step6() {
                     <button
                       type="button"
                       onClick={() => handleDelete(idx)} // button eliminar fila
-                      className="text-gray-500 text-lg font-bold hover:text-gray-700"
+                      className="text-gray-600 dark:text-white text-lg font-bold hover:text-gray-700"
                       aria-label="Eliminar fila"
                       title="Eliminar fila"
                     >
@@ -206,9 +206,9 @@ export default function Step6() {
               ))}
             </tbody>
           </table>
-          <div className="sum font-ral text-lg text-center">Total tokens: {sum}</div>
+          <div className="sum font-ral text-lg text-center dark:text-white">Total tokens: {sum}</div>
           <button type="submit" className="">
-            Disperse
+            Send funds 🚀
           </button>
         </div>
       </motion.section>

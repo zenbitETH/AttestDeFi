@@ -107,7 +107,7 @@ export default function Step3({ handleNext, handleBack }: { handleNext: any; han
             value={!showAttesterENS ? disperseFormData.attesterAddress : disperseFormData.attesterENS}
             onChange={handleInputChange}
             placeholder="Enter attester address"
-            className="bg-zen/50 text-gray-600"
+            className="bg-zen/50 text-gray-600 dark:text-white"
           />
         </div>
       </motion.section>

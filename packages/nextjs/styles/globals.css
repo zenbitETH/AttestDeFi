@@ -19,7 +19,7 @@ Title {
 
 button {
   @apply
-  border-bit border text-black hover:text-white hover:bg-bit px-6 py-1 rounded-md font-ral xl:text-lg 
+  border-bit border-2 dark:text-white text-black hover:text-white hover:bg-bit px-6 py-1 rounded-md font-ral xl:text-lg 
 }
 
 body {

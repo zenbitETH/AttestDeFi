@@ -10,6 +10,7 @@ import Step4 from "~~/components/Step4";
 import Step5 from "~~/components/Step5";
 import Step6 from "~~/components/Step6";
 import Navbar from "~~/components/StepperPanel";
+import { SwitchTheme } from "~~/components/SwitchTheme";
 
 const Home: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -52,7 +53,7 @@ const Home: NextPage = () => {
               className={`${currentStep === step.index ? "active h-full w-full " : ""}`}
               style={{ display: currentStep === step.index ? "block" : "none" }}
             >
-              <div className=" flex justify-center items-center text-gray-600 dark:text-neutral-600 rounded-md dark:bg-neutral-800 dark:border-neutral-700">
+              <div className=" flex justify-center items-center text-gray-600 dark:text-neutral-600 rounded-md">
                 {step.index === 1 && <Step1 handleNext={handleNext} />}
 
                 {step.index === 2 && <Step2 handleNext={handleNext} handleBack={handleBack} />}
@@ -69,6 +70,7 @@ const Home: NextPage = () => {
           ))}
         </AnimatePresence>
       </main>
+      <SwitchTheme />
     </main>
   );
 };
