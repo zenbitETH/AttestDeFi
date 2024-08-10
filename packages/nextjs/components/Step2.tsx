@@ -69,7 +69,7 @@ function Step2({ handleNext, handleBack }: { handleNext: any; handleBack: any })
         // initial={location.state.name === "step1" ? "initial" : "initial2"}
         animate="animate"
         exit={goback ? "exit2" : "exit"}
-        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl p-10 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl p-10  relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
         <Title title="Enter Schema ID">Enter the Schema ID that granted the attestations.</Title>
         <div className="space-y-4 md:space-y-0 flex flex-col md:flex-row md:space-x-6">

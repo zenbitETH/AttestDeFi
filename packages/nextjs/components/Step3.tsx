@@ -97,7 +97,7 @@ export default function Step3({ handleNext, handleBack }: { handleNext: any; han
         // initial={location.state.name === "step2" ? "initial" : "initial2"}
         animate="animate"
         exit={goback ? "exit2" : "exit"}
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7  relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
         <Title title="Enter attester address or ENS">
           Enter the attester address or ENS you want to validate the attestations from.

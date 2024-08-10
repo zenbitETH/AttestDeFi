@@ -52,7 +52,7 @@ function Step1({ handleNext }: { handleNext: any }) {
         // initial={location.hasOwnProperty("state.name") ? "initial" : "initial2"}
         animate="animate"
         exit="exit"
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-screen rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%]"
+        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%]"
       >
         <Title title="Select attest network">
           Please, select the network you want to validate the attestations from.
