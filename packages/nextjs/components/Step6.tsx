@@ -46,6 +46,7 @@ export default function Step6() {
   const [sum, setSum] = useState(0); //suma total
   const [inputs, setInputs] = useState<any>({}); //  valores de los inputs
   const [attestations, setAttestations] = useState([]); // manejo atestaciones
+  // const [distributionAmount] = useState<number>(0); // impresion cantidad distrib
 
   const GET_ATTESTERS = gql`
     query Attestations($schemaID: String!, $attesterAddress: String!) {
@@ -84,6 +85,17 @@ export default function Step6() {
     const sum = values.reduce((acc: number, c: number) => acc + c, 0); // suma el valor
     setSum(sum); // muestra valor
   }
+
+  // Cantidad impresa imput
+  // function applyAmmout() {
+  //   const updatedInputs = Object.keys(inputs).reduce((acc: { [key: string]: number }, key) => {
+  //     acc[key] = distributionAmount; // asigno valor a cada imput
+
+  //     return acc;
+  //   }, {});
+
+  //   setInputs(updatedInputs);
+  // }
 
   //  cambio del imput
   function handleInput(e: any) {
