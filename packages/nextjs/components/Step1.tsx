@@ -52,7 +52,7 @@ function Step1({ handleNext }: { handleNext: any }) {
         // initial={location.hasOwnProperty("state.name") ? "initial" : "initial2"}
         animate="animate"
         exit="exit"
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%]"
+        className="flex flex-col  mb-8 md:mb-0  rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%]"
       >
         <Title title="Select attest network">
           Please, select the network you want to validate the attestations from.
@@ -63,7 +63,7 @@ function Step1({ handleNext }: { handleNext: any }) {
             name="baseNetwork"
             value={disperseFormData.baseNetwork}
             onChange={event => setDisperseFormData("baseNetwork", event.target.value)}
-            className="mt-4 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mb-3"
           >
             <option value="">Select a network</option>
             <option value="Ethereum">Ethereum</option>
