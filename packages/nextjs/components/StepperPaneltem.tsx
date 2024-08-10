@@ -19,16 +19,13 @@ const navItemVariant: Variants = {
 
 export const StepperPaneltem = ({ step, type, on }: NavItemType) => {
   return (
-    <motion.div variants={navItemVariant} className="flex md:p-10 md:items-center md:py-0 md:space-x-5">
+    <motion.div variants={navItemVariant} className="flex md:p-3 md:items-center md:py-0 gap-3">
       <div
-        className={`h-8 w-8 border font-bold border-white grid place-items-center rounded-full transition duration-500 ease-in-out ${on ? "bg-green-300 border-green-400 text-blue-700" : ""}`}
+        className={`h-10 w-10 border font-bold border-white grid place-items-center rounded-full transition duration-500 ease-in-out ${on ? "bg-white border-white text-gray-600 animate-pulse" : ""}`}
       >
         {step}
       </div>
-      <div className="hidden md:flex flex-col space-y-[-3px]">
-        <p className="text-[13px] text-Light-gray">STEP {step}</p>
-        <p className="font-[700] text-[14px] tracking-wider">{type}</p>
-      </div>
+      <span className={`${on ? "animate-pulse text-gray-600 bg-white py-2 px-3 rounded-full" : ""}`}>{type}</span>
     </motion.div>
   );
 };

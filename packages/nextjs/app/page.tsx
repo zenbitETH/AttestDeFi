@@ -10,6 +10,7 @@ import Step4 from "~~/components/Step4";
 import Step5 from "~~/components/Step5";
 import Step6 from "~~/components/Step6";
 import Navbar from "~~/components/StepperPanel";
+import { SwitchTheme } from "~~/components/SwitchTheme";
 
 const Home: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -39,38 +40,37 @@ const Home: NextPage = () => {
 
   return (
     <main
-      className="bg-Light-gray grid place-items-center w-screen md:min-h-full box-border overflow-x-hidden"
+      className="grid place-items-center md:min-h-full box-border overflow-x-hidden "
       style={{ fontFamily: "Ubuntu" }}
     >
-      <main className=" flex flex-col items-center min-h-full md:min-h-full w-screen md:max-w-[1280px] md:flex-row md:bg-white md:rounded-xl md:p-5 relative md:h-fit md:overflow-x-hidden md:overflow-hidden">
-        <Navbar step={currentStep} />
-        <section className="w-full flex flex-1 gap-4 flex-col items-center md:h-full md:justify-between md:mb-0">
-          <AnimatePresence mode="wait">
-            {steps.map(step => (
-              <div
-                key={step.index}
-                data-hs-stepper-content-item={`{ "index": ${step.index} }`}
-                className={`${currentStep === step.index ? "active w-full p-4" : ""}`}
-                style={{ display: currentStep === step.index ? "block" : "none" }}
-              >
-                <div className="w-full p-4 bg-gray-50 flex justify-center items-center border border-dashed text-gray-500 dark:text-neutral-500 rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-                  {step.index === 1 && <Step1 handleNext={handleNext} />}
+      <Navbar step={currentStep} />
+      <main className=" absolute top-1/2 -translate-y-1/2 flex flex-col w-5/12 items-center h-full md:min-h-full md:flex-row md:rounded-xl  md:h-fit md:overflow-x-hidden md:overflow-hidden">
+        <AnimatePresence mode="wait">
+          {steps.map(step => (
+            <div
+              key={step.index}
+              data-hs-stepper-content-item={`{ "index": ${step.index} }`}
+              className={`${currentStep === step.index ? "active h-full w-full " : ""}`}
+              style={{ display: currentStep === step.index ? "block" : "none" }}
+            >
+              <div className=" flex justify-center items-center text-gray-600 dark:text-neutral-600 rounded-md">
+                {step.index === 1 && <Step1 handleNext={handleNext} />}
 
-                  {step.index === 2 && <Step2 handleNext={handleNext} handleBack={handleBack} />}
+                {step.index === 2 && <Step2 handleNext={handleNext} handleBack={handleBack} />}
 
-                  {step.index === 3 && <Step3 handleNext={handleNext} handleBack={handleBack} />}
+                {step.index === 3 && <Step3 handleNext={handleNext} handleBack={handleBack} />}
 
-                  {step.index === 4 && <Step4 handleNext={handleNext} handleBack={handleBack} />}
+                {step.index === 4 && <Step4 handleNext={handleNext} handleBack={handleBack} />}
 
-                  {step.index === 5 && <Step5 handleNext={handleNext} handleBack={handleBack} />}
+                {step.index === 5 && <Step5 handleNext={handleNext} handleBack={handleBack} />}
 
-                  {step.index === 6 && <Step6 />}
-                </div>
+                {step.index === 6 && <Step6 />}
               </div>
-            ))}
-          </AnimatePresence>
-        </section>
+            </div>
+          ))}
+        </AnimatePresence>
       </main>
+      <SwitchTheme />
     </main>
   );
 };

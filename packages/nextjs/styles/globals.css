@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -5,6 +7,19 @@
 :root,
 [data-theme] {
   background: oklch(var(--b2));
+}
+
+input, select {
+  @apply font-oxy text-lg placeholder:italic px-6 py-3 w-full border-zen mx-auto rounded-md bg-bit/80 text-white;
+}
+
+Title {
+  @apply font-oxy
+}
+
+button {
+  @apply
+  border-bit border-2 dark:text-white text-black hover:text-white hover:bg-bit px-6 py-1 rounded-md font-ral xl:text-lg 
 }
 
 body {
@@ -31,17 +46,4 @@ p {
   @apply shadow-none;
 }
 
-nav {
-  background-image: url(/zenbaner-mobile.png);
 
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 768px) {
-  nav {
-    background-image: url(/zenbaner-vertical.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-}

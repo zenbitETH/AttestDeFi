@@ -46,7 +46,7 @@ export default function Step6() {
   const [sum, setSum] = useState(0); //suma total
   const [inputs, setInputs] = useState<any>({}); //  valores de los inputs
   const [attestations, setAttestations] = useState([]); // manejo atestaciones
-  const [distributionAmount, setDistributionAmount] = useState<number>(0); // impresion cantidad distrib
+  // const [distributionAmount] = useState<number>(0); // impresion cantidad distrib
 
   const GET_ATTESTERS = gql`
     query Attestations($schemaID: String!, $attesterAddress: String!) {
@@ -87,15 +87,15 @@ export default function Step6() {
   }
 
   // Cantidad impresa imput
-  function applyAmmout() {
-    const updatedInputs = Object.keys(inputs).reduce((acc: { [key: string]: number }, key) => {
-      acc[key] = distributionAmount; // asigno valor a cada imput
+  // function applyAmmout() {
+  //   const updatedInputs = Object.keys(inputs).reduce((acc: { [key: string]: number }, key) => {
+  //     acc[key] = distributionAmount; // asigno valor a cada imput
 
-      return acc;
-    }, {});
+  //     return acc;
+  //   }, {});
 
-    setInputs(updatedInputs);
-  }
+  //   setInputs(updatedInputs);
+  // }
 
   //  cambio del imput
   function handleInput(e: any) {
@@ -155,41 +155,19 @@ export default function Step6() {
   };
 
   return (
-    <form onSubmit={catchSubmit} className="w-full flex flex-col items-center md:h-[580px] md:justify-between">
+    <form onSubmit={catchSubmit} className="w-full flex flex-col items-center md:justify-between pt-96">
       <motion.section
         variants={pageVariant}
         initial="initial"
         animate="animate"
         exit={"exit"}
-        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7  relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col mb-20 rounded-md z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 h-full"
       >
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-          <Title title="Configure transfer">Transfer funds to multiple receivers.</Title>
-
-          <div className="flex items-center mt-4 md:mt-0 space-x-2">
-            <input
-              type="number"
-              value={distributionAmount}
-              onChange={e => setDistributionAmount(+e.target.value)}
-              placeholder="Distribution amount"
-              className=" px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm w-full md:w-32"
-            />
-            <button
-              type="button"
-              onClick={applyAmmout}
-              className="text-gray-500 text-lg font-bold hover:text-gray-700 p-2 rounded-full border border-gray-300 flex items-center justify-center mt-2 md:mt-0 md:ml-2"
-              title="Apply distribution amount"
-              style={{ width: "40px", height: "40px" }}
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster p-6 rounded-xl md:p-8 overflow-y-auto">
+        <Title title="Verify & Send 🚀">Check the addresses and define the reward amount before send it.</Title>
+        <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster rounded-xl overflow-y-auto">
           <table className="table">
             <thead>
-              <tr>
+              <tr className="font-ral dark:text-white">
                 <th></th>
                 <th>Recipient Address</th>
                 <th>Reward Amount</th>
@@ -198,7 +176,7 @@ export default function Step6() {
             </thead>
             <tbody>
               {attestations.map((attestation: any, idx: number) => (
-                <tr key={idx}>
+                <tr className="font-oxy dark:text-white" key={idx}>
                   <th>{idx + 1}</th>
                   <td>
                     <Address address={attestation.recipient} />
@@ -210,14 +188,14 @@ export default function Step6() {
                       name={`ammount-${idx + 1}`} // id input
                       value={inputs[`ammount-${idx + 1}`] || ""} // valor del input
                       onChange={handleInput} // función de cambio
-                      className="mt-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className=""
                     />
                   </td>
                   <td>
                     <button
                       type="button"
                       onClick={() => handleDelete(idx)} // button eliminar fila
-                      className="text-gray-500 text-lg font-bold hover:text-gray-700"
+                      className="text-gray-600 dark:text-white text-lg font-bold hover:text-gray-700"
                       aria-label="Eliminar fila"
                       title="Eliminar fila"
                     >
@@ -228,9 +206,9 @@ export default function Step6() {
               ))}
             </tbody>
           </table>
-          <div className="sum">Total tokens: {sum}</div>
-          <button type="submit" className="btn">
-            Disperse
+          <div className="sum font-ral text-lg text-center dark:text-white">Total tokens: {sum}</div>
+          <button type="submit" className="">
+            Send funds 🚀
           </button>
         </div>
       </motion.section>

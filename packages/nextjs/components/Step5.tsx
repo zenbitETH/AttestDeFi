@@ -73,21 +73,19 @@ export default function Step5({ handleNext, handleBack }: { handleNext: any; han
         initial="initial"
         animate="animate"
         exit={goback ? "exit2" : "exit"}
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col  mb-8 md:mb-0  rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
-        <Title title="Type of rewards">
-          Select the type of rewards you want to disperse, it can be any ERC20 token.
-        </Title>
-        <div className="w-full flex flex-col space-y-4 md:space-y-5 bg-Alabaster p-6 rounded-xl md:p-8">
+        <Title title="Type of rewards 🪙">Select the type of rewards you want to disperse.</Title>
+        <div className="w-full flex flex-col space-y-4 md:space-y-5 bg-Alabaster rounded-xl ">
           <select
             name="typeOfReward"
             value={disperseFormData.typeOfReward}
             onChange={event => setDisperseFormData("typeOfReward", event.target.value)}
-            className="mt-4 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className=""
           >
             <option value="">Select type of reward</option>
-            <option value="ETH">ETH</option>
-            <option value="custom">Custom ERC20 token</option>
+            <option value="ETH">ETH 💠</option>
+            <option value="custom">Custom ERC20 token 🪙</option>
           </select>
           {disperseFormData.typeOfReward === "custom" ? (
             <input
@@ -96,7 +94,7 @@ export default function Step5({ handleNext, handleBack }: { handleNext: any; han
               placeholder="Enter ERC20 contract address. 0x...."
               value={disperseFormData.erc20address}
               onChange={event => setDisperseFormData("erc20address", event.target.value)}
-              className="mt-4 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="placeholder:text-white/60"
             />
           ) : null}
         </div>

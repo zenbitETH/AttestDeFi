@@ -69,9 +69,9 @@ function Step2({ handleNext, handleBack }: { handleNext: any; handleBack: any })
         // initial={location.state.name === "step1" ? "initial" : "initial2"}
         animate="animate"
         exit={goback ? "exit2" : "exit"}
-        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl p-10  relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col mb-8 md:mb-0 rounded-2xl p-10 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
-        <Title title="Enter Schema ID">Enter the Schema ID that granted the attestations.</Title>
+        <Title title="Enter the Schema ID 📜">Enter the Schema ID from which the attestations were granted.</Title>
         <div className="space-y-4 md:space-y-0 flex flex-col md:flex-row md:space-x-6">
           <input
             type="text"
@@ -79,7 +79,7 @@ function Step2({ handleNext, handleBack }: { handleNext: any; handleBack: any })
             value={disperseFormData.schemaID}
             onChange={event => setDisperseFormData("schemaID", event.target.value)}
             placeholder="Enter schema ID"
-            className="mt-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="bg-zen/50 text-gray-600 dark:text-white text-base"
           />
         </div>
       </motion.section>
