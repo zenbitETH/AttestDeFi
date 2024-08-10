@@ -45,34 +45,29 @@ function Step1({ handleNext }: { handleNext: any }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full flex flex-col flex-1 md:min-h-fit items-center md:h-[580px] md:justify-between"
+      className=" flex flex-col flex-1 md:min-h-fit items-center md:h-[580px] md:justify-between md"
     >
       <motion.section
         variants={pageVariant}
         // initial={location.hasOwnProperty("state.name") ? "initial" : "initial2"}
         animate="animate"
         exit="exit"
-        className="flex flex-col  mb-8 md:mb-0  rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%]"
+        className=" "
       >
-        <Title title="Select attest network">
-          Please, select the network you want to validate the attestations from.
-        </Title>
-
-        <div className="space-y-4 md:space-y-7 overflow-x-hidden">
-          <select
-            name="baseNetwork"
-            value={disperseFormData.baseNetwork}
-            onChange={event => setDisperseFormData("baseNetwork", event.target.value)}
-            className="mb-3"
-          >
-            <option value="">Select a network</option>
-            <option value="Ethereum">Ethereum</option>
-            <option value="Optimism">Optimism</option>
-            <option value="Base">Base</option>
-            {/* <option value="Celo">Celo</option> */}
-            {/* <option value="Mode">Mode</option> */}
-          </select>
-        </div>
+        <Title title="Select the Attest Network 🎖️">In which network the attestations were granted?</Title>
+        <select
+          name="baseNetwork"
+          value={disperseFormData.baseNetwork}
+          onChange={event => setDisperseFormData("baseNetwork", event.target.value)}
+          className="mb-3 bg-zen/50 text-gray-600"
+        >
+          <option value="">Select a network</option>
+          <option value="Ethereum">⬜ Ethereum</option>
+          <option value="Optimism">🟥 Optimism</option>
+          <option value="Base">🟦 Base</option>
+          {/* <option value="Celo">Celo</option> */}
+          {/* <option value="Mode">Mode</option> */}
+        </select>
       </motion.section>
       <Next goBack={false} next={true} />
     </form>

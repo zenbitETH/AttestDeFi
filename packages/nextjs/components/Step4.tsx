@@ -63,23 +63,21 @@ export default function Step4({ handleNext, handleBack }: { handleNext: any; han
         initial="initial"
         animate="animate"
         exit={goback ? "exit2" : "exit"}
-        className="flex flex-col  mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col  mb-8 md:mb-0 rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
       >
-        <Title title="Select distribution network">
-          Select the network where you want to disperse your rewards on.
-        </Title>
-        <div className="w-full flex flex-col space-y-4 md:space-y-5 bg-Alabaster p-6 rounded-xl md:p-8">
+        <Title title="Select distribution network 💸">In which network do you want to distribute funds?</Title>
+        <div className="w-full flex flex-col space-y-4 md:space-y-5 bg-Alabaster rounded-xl">
           <select
             name="selectRedDestin"
             value={disperseFormData.destinationNetwork}
             onChange={event => setDisperseFormData("destinationNetwork", event.target.value)}
-            className="mt-4 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className=""
           >
             <option value="">Select the destination network</option>
-            <option value="Optimism">Optimism</option>
-            <option value="Base">Base</option>
-            <option value="Celo">Celo</option>
-            <option value="Mode">Mode</option>
+            <option value="Optimism">🔴 Optimism</option>
+            <option value="Base">🔵 Base</option>
+            <option value="Celo">🟡 Celo</option>
+            <option value="Mode">🟢 Mode</option>
             <option value="Hardhat">Hardhat</option>
           </select>
         </div>

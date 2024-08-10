@@ -143,19 +143,19 @@ export default function Step6() {
   };
 
   return (
-    <form onSubmit={catchSubmit} className="w-full flex flex-col items-center md:h-[580px] md:justify-between">
+    <form onSubmit={catchSubmit} className="w-full flex flex-col items-center md:justify-between pt-96">
       <motion.section
         variants={pageVariant}
         initial="initial"
         animate="animate"
         exit={"exit"}
-        className="flex flex-col mb-8 md:mb-0 bg-white w-[90%] rounded-2xl py-10 px-7 z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 md:w-[70%] h-full"
+        className="flex flex-col mb-20 rounded-md z-30 relative bottom-24 text-[14px] md:bottom-0 md:p-0 h-full"
       >
-        <Title title="Configure transfer">Transfer funds to multiple receivers.</Title>
-        <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster p-6 rounded-xl md:p-8 overflow-y-auto">
+        <Title title="Verify & Send 🚀">Check the addresses and define the reward amount before send it.</Title>
+        <div className="w-full flex flex-col space-y-4 md:space-y-3 bg-Alabaster rounded-xl overflow-y-auto">
           <table className="table">
             <thead>
-              <tr>
+              <tr className="font-ral">
                 <th></th>
                 <th>Recipient Address</th>
                 <th>Reward Amount</th>
@@ -164,7 +164,7 @@ export default function Step6() {
             </thead>
             <tbody>
               {attestations.map((attestation: any, idx: number) => (
-                <tr key={idx}>
+                <tr className="font-oxy" key={idx}>
                   <th>{idx + 1}</th>
                   <td>
                     <Address address={attestation.recipient} />
@@ -176,7 +176,7 @@ export default function Step6() {
                       name={`ammount-${idx + 1}`} // id input
                       value={inputs[`ammount-${idx + 1}`] || ""} // valor del input
                       onChange={handleInput} // función de cambio
-                      className="mt-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className=""
                     />
                   </td>
                   <td>
@@ -194,8 +194,8 @@ export default function Step6() {
               ))}
             </tbody>
           </table>
-          <div className="sum">Total tokens: {sum}</div>
-          <button type="submit" className="btn">
+          <div className="sum font-ral text-lg text-center">Total tokens: {sum}</div>
+          <button type="submit" className="">
             Disperse
           </button>
         </div>
