@@ -81,11 +81,47 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        display: ["group-hover"],
+        zen: "#F3A754",
+        bit: "#4682B4",
+      },
+      fontFamily: {
+        ral: ["Raleway"],
+        oxy: ["Oxygen"],
+        rob: ["Roboto"],
+      },
+      screens: {
+        "2xl": "1601px",
+        "h-sm": { raw: "(min-height: 500px)" },
+        "h-md": { raw: "(min-height: 850px)" },
+        "h-lg": { raw: "(min-height: 1000px)" },
+      },
+      borderRadius: {
+        md: "32px",
+        in: "20px",
+      },
       boxShadow: {
         center: "0 0 12px -2px rgb(0 0 0 / 0.05)",
       },
+      keyframes: {
+        grow: {
+          "0%": {
+            width: "0%",
+          },
+          "100%": {
+            width: "100%",
+          },
+        },
+        zoom: {
+          "0%, 100%": { transform: "scale(1, 1)" },
+          "50%": { transform: "scale(1.1, 1.1)" },
+        },
+      },
       animation: {
+        grow: "grow 5s linear infinite",
         "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        zoom: "zoom 1s ease infinite",
       },
     },
   },
