@@ -5,6 +5,55 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
+  10: {
+    Disperse: {
+      address: "0x7c6F40f29C45c6B4E37d1620b8a7568B40913a5a",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "address[]",
+              name: "recipients",
+              type: "address[]",
+            },
+            {
+              internalType: "uint256[]",
+              name: "values",
+              type: "uint256[]",
+            },
+          ],
+          name: "disperseEther",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "contract IERC20",
+              name: "tokenAddress",
+              type: "address",
+            },
+            {
+              internalType: "address payable[]",
+              name: "recipients",
+              type: "address[]",
+            },
+            {
+              internalType: "uint256[]",
+              name: "values",
+              type: "uint256[]",
+            },
+          ],
+          name: "disperseToken",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
   8453: {
     Disperse: {
       address: "0xA7210b419372222429f2A692B253BAeb50AEa12a",
