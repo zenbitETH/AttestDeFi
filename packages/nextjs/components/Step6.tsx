@@ -257,7 +257,9 @@ export default function Step6() {
               ))}
             </tbody>
           </table>
-          <div className="sum font-ral text-lg text-center dark:text-white">Total tokens: {sum}</div>
+          <div className="sum font-ral text-lg text-center dark:text-white">
+            <div className="text-transparent">{sum}</div>
+          </div>
           <button type="submit" className="">
             Send funds 🚀
           </button>
